@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             rb5.setVisibility(View.INVISIBLE);
         }
+        if (questionCounter >= questionCountTotal -1) {
+            buttonConfirmNext.setText("Next & Finish");
+        } else {
+            buttonConfirmNext.setText("Next");
+        }
         if (questionCounter < questionCountTotal) {
             rbGroup.clearCheck();
             currentQuestion = questionList.get(questionCounter);
@@ -123,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
 
             answered = false;
         } else {
+            buttonConfirmNext.setEnabled(false);
+            buttonConfirmNext.setVisibility(View.INVISIBLE);
             // pindah ke intent ......
             finishQuiz();
         }
@@ -133,5 +140,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RingkasanQuiz.class);
         intent.putExtra("ringkasanQuiz", ringkasanQuiz);
         startActivity(intent);
+        finish();
     }
 }
