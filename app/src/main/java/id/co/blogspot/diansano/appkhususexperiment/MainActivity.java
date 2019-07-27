@@ -1,5 +1,6 @@
 package id.co.blogspot.diansano.appkhususexperiment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean answered;
 
-    private int score;
+  //  private int score;
 
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
 
-
+    private String ringkasanQuiz = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         questionList = dataArray.getQuestions();
         questionCountTotal = questionList.size();
 
+     //   ringkasanQuiz = "Pertanyaan ke: " + (questionCounter + 1) + " ";
 
 
         rbGroup = findViewById(R.id.radio_group);
@@ -66,25 +68,31 @@ public class MainActivity extends AppCompatActivity {
                         switch (rbGroup.getCheckedRadioButtonId()) {
                             case R.id.radio_button1:
                                 //   rb1.setTextColor(Color.GREEN);
-                                tvSkor.setText("" + 0);
-                                textViewQuestion.setText("Anda pilih jawaban A");
+                                tvSkor.setText("Skor: " + 0);
+                                ringkasanQuiz += "Anda pilih jawaban A skor: 0 \n";
+                             //   textViewQuestion.setText("Anda pilih jawaban A");
                                 break;
                             case R.id.radio_button2:
-                                tvSkor.setText("" + 1);
+                                tvSkor.setText("Skor: " + 1);
+                                ringkasanQuiz += "Anda pilih jawaban B skor: 1 \n";
                                 //     rb2.setTextColor(Color.GREEN);
-                                textViewQuestion.setText("Anda pilih jawaban B");
+                              //  textViewQuestion.setText("Anda pilih jawaban B");
                                 break;
                             case R.id.radio_button3:
-                                tvSkor.setText("" + 2);
+                                tvSkor.setText("Skor: " + 2);
+                                ringkasanQuiz += "Anda pilih jawaban C skor: 2 \n";
                                 //   rb3.setTextColor(Color.GREEN);
-                                textViewQuestion.setText("Anda pilih Jawaban C");
+                              //  textViewQuestion.setText("Anda pilih Jawaban C");
                                 break;
                             case R.id.radio_button4:
-                                tvSkor.setText("" + 3);
+                                tvSkor.setText("Skor: " + 3);
+                                ringkasanQuiz += "Anda pilih jawaban D skor: 3 \n";
                                 //   rb3.setTextColor(Color.GREEN);
-                                textViewQuestion.setText("Anda pilih jawaban D");
+                             //   textViewQuestion.setText("Anda pilih jawaban D");
                                 break;
-                        } showNextQuestion();
+                        }
+
+                        showNextQuestion();
                         } else {
                         Toast.makeText(MainActivity.this, "Please select an answer",
                                 Toast.LENGTH_SHORT).show();
@@ -97,10 +105,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showNextQuestion() {
-
-        rbGroup.clearCheck();
-
         if (questionCounter < questionCountTotal) {
+            rbGroup.clearCheck();
             currentQuestion = questionList.get(questionCounter);
 
             textViewQuestion.setText(currentQuestion.getQuestion());
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             rb3.setText(currentQuestion.getOption3());
             rb4.setText(currentQuestion.getOption4());
 
-
+            ringkasanQuiz += "Pertanyaan ke: " + (questionCounter + 1) + " ";
             questionCounter++;
 
             answered = false;
@@ -123,53 +129,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
-                finish();
-    }
-
-    private void checkAnswer() {
-      //  answered = true;
-
-      //  RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
-     //   int answerNr = rbGroup.indexOfChild(rbSelected) + 1;
-
-       // if (answered) {
-        //if (answerNr == Integer.valueOf(currentQuestion.getAnswerNr())) {
-            score++;
-            //textViewScore.setText("Score: " + score);
-     //   }
-        showSolution();
-    }
-
-    private void showSolution() {
-
-        switch (rbGroup.getCheckedRadioButtonId()) {
-            case R.id.radio_button1:
-             //   rb1.setTextColor(Color.GREEN);
-                tvSkor.setText("" + 0);
-                textViewQuestion.setText("Anda pilih jawaban A");
-                break;
-            case R.id.radio_button2:
-                tvSkor.setText("" + 1);
-           //     rb2.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Anda pilih jawaban B");
-                break;
-            case R.id.radio_button3:
-                tvSkor.setText("" + 2);
-             //   rb3.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Anda pilih Jawaban C");
-                break;
-            case R.id.radio_button4:
-                tvSkor.setText("" + 3);
-                //   rb3.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Anda pilih jawaban D");
-                break;
-        }
-
-        if (questionCounter < questionCountTotal) {
-            buttonConfirmNext.setText("Next");
-        } else {
-            buttonConfirmNext.setText("Finish");
-        }
+        Intent intent = new Intent(this, RingkasanQuiz.class);
+        intent.putExtra("ringkasanQuiz", ringkasanQuiz);
+                startActivity(intent);
     }
 
 }
