@@ -55,6 +55,14 @@
             android:freezesText="true"
             android:text="Option 4" />
 
+        <RadioButton
+            android:visibility="invisible"
+            android:id="@+id/radio_button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:text="Option 5" />
+
     </RadioGroup>
 
     <Button
@@ -64,7 +72,8 @@
         android:layout_below="@id/radio_group"
         android:layout_marginTop="16dp"
         android:freezesText="true"
-        android:text="Confirm" />
+        android:text="Next" />
+
 
 
 </RelativeLayout>
