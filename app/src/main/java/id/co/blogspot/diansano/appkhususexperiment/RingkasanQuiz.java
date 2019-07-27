@@ -15,4 +15,5 @@ public class RingkasanQuiz extends AppCompatActivity {
         TextView ringkasanQuiz = findViewById(R.id.tv_ringkasan_quiz);
         ringkasanQuiz.setText(getIntent().getStringExtra("ringkasanQuiz"));
     }
+
 }
