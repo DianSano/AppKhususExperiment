@@ -24,12 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rb5;
 
     private Button buttonConfirmNext;
-
     private ArrayList<Question> questionList;
 
     private boolean answered;
-
-    //  private int score;
 
     private int questionCounter;
     private int questionCountTotal;
@@ -67,23 +64,23 @@ public class MainActivity extends AppCompatActivity {
                             || rb5.isChecked()) {
                         switch (rbGroup.getCheckedRadioButtonId()) {
                             case R.id.radio_button1:  //   rb1.setTextColor(Color.GREEN);
-                                tvSkor.setText("Skor: " + 0);
+                                tvSkor.setText("Skor: " + 0 + " - Question counter: " + questionCounter);
                                 ringkasanQuiz += "Anda pilih jawaban A skor: 0 \n";
                                 break;
                             case R.id.radio_button2:
-                                tvSkor.setText("Skor: " + 1);
+                                tvSkor.setText("Skor: " + 1 + " - Question counter: " + questionCounter );
                                 ringkasanQuiz += "Anda pilih jawaban B skor: 1 \n";
                                 break;
                             case R.id.radio_button3:
-                                tvSkor.setText("Skor: " + 2);
+                                tvSkor.setText("Skor: " + 2 + " - Question counter: " + questionCounter);
                                 ringkasanQuiz += "Anda pilih jawaban C skor: 2 \n";
                                 break;
                             case R.id.radio_button4:
-                                tvSkor.setText("Skor: " + 3);
+                                tvSkor.setText("Skor: " + 3 + " - Question counter: " + questionCounter);
                                 ringkasanQuiz += "Anda pilih jawaban D skor: 3 \n";
                                 break;
                             case R.id.radio_button5:
-                                tvSkor.setText("Skor: " + 4);
+                                tvSkor.setText("Skor: " + 4 + " - Question counter: " + questionCounter);
                                 ringkasanQuiz += "Anda pilih jawaban E skor: 4 \n";
                                 break;
                         }
@@ -98,10 +95,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     private void showNextQuestion() {
         //pertanyaan ke-2 dan ke-4 ada 5 radio button yang lain hanya 4
+        // questionCounter dimulai dari hitungan ke-0 (untuk pertanyaan ke-1
         if (questionCounter == 1 || questionCounter == 3) {
             rb5.setVisibility(View.VISIBLE);
         } else {
@@ -122,20 +122,16 @@ public class MainActivity extends AppCompatActivity {
             questionCounter++;
 
             answered = false;
-            buttonConfirmNext.setText("Confirm");
-
-
         } else {
             // pindah ke intent ......
             finishQuiz();
-
         }
     }
+
 
     private void finishQuiz() {
         Intent intent = new Intent(this, RingkasanQuiz.class);
         intent.putExtra("ringkasanQuiz", ringkasanQuiz);
         startActivity(intent);
     }
-
 }
